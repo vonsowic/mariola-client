@@ -1,27 +1,61 @@
 import request from 'axios'
+import moment from "moment/moment";
 
 export const callGetCourses = facultyId =>
     dispatch => request.get(`/api/plan/${facultyId}/general`)
-        .then(({data}) => dispatch(setCourses(data)));
+        .then(({data}) => data.map(c => fromGeneralToCalendarFormat(c)))
+        .then(cs => dispatch(setCourses(cs)));
 
-export const addCourses = courses => ({
-    type: 'ADD_COURSES',
-    courses
+const fromGeneralToCalendarFormat = course => Object.assign({}, course, {
+        start: convertCourseDateToCalendarFormat(course.dayOfWeek, course.start),
+        end: convertCourseDateToCalendarFormat(course.dayOfWeek, course.end),
+        title: course.name
+    });
+
+const convertCourseDateToCalendarFormat = (dayOfWeek, time) => {
+    let hourMinute = time.split(':');
+    return new Date(
+        moment()
+            .add(-new Date().getDay() + dayOfWeek, 'day')
+            .hour(hourMinute[0] )
+            .minute(hourMinute[1] )
+    )
+};
+
+export const callGetMyCourses = (start, end) =>
+    dispatch => request.get("/api/plan/my", {
+        params: {
+            start,
+            end,
+        }
+    })
+        .then(({data}) => data.map(toCalendarFormat))
+        .then(cs => dispatch(setCourses(cs)));
+
+
+export const callGetDetailedCourses = (facultyId, start, end) =>
+    dispatch => request.get(`/api/plan/${facultyId}`, {
+        params: {
+            start,
+            end,
+        }
+    })
+        .then(({data}) => data.map(toCalendarFormat))
+        .then(cs => dispatch(setCourses(cs)));
+
+
+const toCalendarFormat = e => ({
+    title: e.name,
+    start: new Date(e["courses_details.start"]),
+    end: new Date(e["courses_details.end"]),
 });
+
 
 export const setCourses = courses => ({
     type: 'SET_COURSES',
     courses
 });
 
-export const callGetDetailedCourses = facultyId =>
-    dispatch => request.get(`/api/plan/${facultyId}`)
-        .then(({data}) => dispatch(addCourses(data)));
-
-export const addDetailedCourses = courses => ({
-    type: 'ADD_DETAILED_COURSES',
-    courses
-});
 
 export const callGetMyCoursesIds = () =>
     dispatch => request.get('/api/plan/my/ids')

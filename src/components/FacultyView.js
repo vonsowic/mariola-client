@@ -12,7 +12,7 @@ export default ({url, facultyId, isAdmin}) => (
         <div className="col-sm-2">
             <Sidebar
                 facultyId={facultyId}
-                isAdmin={!isAdmin}/>
+                isAdmin={isAdmin}/>
         </div>
         <div className="col-sm-10">
             <Route
@@ -23,7 +23,7 @@ export default ({url, facultyId, isAdmin}) => (
                 render={() => <ExchangePanel facultyId={facultyId}/>}/>
             <Route
                 path={`${url}/plan`}
-                component={FacultyPlan}/>
+                component={() => <FacultyPlan facultyId={facultyId}/>}/>
             <Route
                 path={`${url}/settings`}
                 component={AdminPanel}/>

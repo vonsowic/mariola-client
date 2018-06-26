@@ -41,7 +41,6 @@ class GeneralPlan extends Component {
                     onSelectEvent={course=>{
                         this.props.dispatch(select(course))
                     }}
-                    defaultDate={new Date()}
                     defaultView="work_week"
                     views={["work_week"]}
                     eventPropGetter={event => ({
@@ -56,7 +55,7 @@ class GeneralPlan extends Component {
                     }}
                     min={new Date(moment().hour(7).minute(0))}
                     max={new Date(moment().hour(21).minute(0))}
-                    events={this.props.courses.map(toCalendarFormat)}
+                    events={this.props.courses}
                 />
             </div>)
     }
@@ -71,23 +70,7 @@ class GeneralPlan extends Component {
     }
 }
 
-function toCalendarFormat(course){
-    return Object.assign({}, course, {
-        start: convertCourseDateToCalendarFormat(course.dayOfWeek, course.start),
-        end: convertCourseDateToCalendarFormat(course.dayOfWeek, course.end),
-        title: course.name
-    })
-}
 
-function convertCourseDateToCalendarFormat(dayOfWeek, time){
-    let hourMinute = time.split(':');
-    return new Date(
-        moment()
-            .add(-new Date().getDay() + dayOfWeek, 'day')
-            .hour(hourMinute[0] )
-            .minute(hourMinute[1] )
-    )
-}
 
 function mapStateToProps(state) {
     return {

@@ -1,32 +1,24 @@
-import React from 'react'
-import BigCalendar from 'react-big-calendar'
-import {connect} from 'react-redux'
-import moment from "moment/moment";
+import React from "react";
+import {connect} from "react-redux";
+import {callGetDetailedCourses} from "../actions/courses";
+import BaseCalendarContainer from "./BaseCalendarContainer";
 
 
 class FacultyPlan extends React.Component {
-    componentDidMount(){
-        // this.props.dispatch(callGetFacultyCourses())
-    }
-
-    render(){
+    render() {
         return (
-            <BigCalendar
-                defaultDate={new Date()}
-                defaultView="work_week"
-                views={["work_week", "week", "month"]}
-                style={{height: "100vh"}}
-                min={new Date(moment().hour(7).minute(0))}
-                max={new Date(moment().hour(21).minute(0))}
-                events={[]}
-            />
+            <BaseCalendarContainer
+                callGet={() => this.props.dispatch(
+                    callGetDetailedCourses(this.props.facultyId, this.props.start, this.props.end)
+                )}/>
         )
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state){
     return {
-        detailedCourses: state.detailedCourses
+        start: state.calendar.start,
+        end: state.calendar.end,
     }
 }
 

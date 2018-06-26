@@ -7,6 +7,8 @@ import FacultyView from "./FacultyView";
 import {AlertList} from "react-bs-notifier";
 import {connect} from "react-redux";
 import {dismissAlert} from "../actions/alert";
+import MyPlan from "./MyPlan";
+import JoinToFaculty from "./JoinToFaculty";
 
 
 class App extends Component {
@@ -20,8 +22,10 @@ class App extends Component {
                             onDismiss={({id}) => this.props.dispatch(dismissAlert(id))}
                             timeout={this.props.alerts.length > 0 ? this.props.alerts[0].timeout : 0}
                             alerts={this.props.alerts} />
+                        <JoinToFaculty/>
                         <Switch>
                             <Route exact path='/' component={HomePage}/>
+                            <Route path='/myplan' component={MyPlan}/>
                             <Route path='/:facultyId' component={FacultyView}/>
                             <Route path='/*' component={NotFound}/>
                         </Switch>

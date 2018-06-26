@@ -1,12 +1,9 @@
 import axios from "axios";
 import {refresh} from "./actions/authorization";
 import {alertError} from "./actions/alert";
-import join from 'url-join';
 
 export default dispatch => {
     axios.interceptors.request.use(config =>{
-        config.url = join('http://localhost:5000', config.url);
-
         if(!config.headers['Authorization']) {
             Object.assign(config.headers, {
                 Authorization: `Bearer ${localStorage.getItem('token')}`

@@ -7,6 +7,10 @@ export default class Profile extends React.Component {
     render(){
         return (
             <NavDropdown eventKey={3} title={`Witaj, ${this.props.name}`} id="basic-nav-dropdown">
+                <MenuItem>
+                    <NavLink to={`/myplan`}>Mój plan</NavLink>
+                </MenuItem>
+                <MenuItem divider />
                 {this.props.faculties.map(f =>
                     <MenuItem key={f.id}>
                         <NavLink to={`/${f.id}/home`}>{f.name}</NavLink>

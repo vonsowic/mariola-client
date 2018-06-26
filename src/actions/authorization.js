@@ -9,6 +9,7 @@ export const login = ({token, refreshToken}, profileImageUrl) => {
     localStorage.setItem('token', token);
     localStorage.setItem('refreshToken', refreshToken);
     localStorage.setItem('profileImageUrl', profileImageUrl);
+    window.location.reload();
     return {
         type: 'LOGIN',
         token,
@@ -30,6 +31,7 @@ export const logout = () => {
     delete localStorage['token'];
     delete localStorage['refreshToken'];
     delete localStorage['profileImageUrl'];
+    window.location.replace("/");
     return {
         type: 'LOGOUT'
     }

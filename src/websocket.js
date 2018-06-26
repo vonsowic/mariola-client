@@ -1,5 +1,6 @@
 import {callGetIntentions, removeIntention} from "./actions/intentions";
 import Sockette from "sockette";
+import {alertExchanged} from "./actions/alert";
 
 
 export default dispatch => {
@@ -11,6 +12,7 @@ export default dispatch => {
             facultyIds: [6]
         }),
         onmessage: ({data}) => handleMessage(JSON.parse(data)),
+        onerror: e => console.log('Error:', e),
         protocols: 'echo-protocol'
     });
 
@@ -23,10 +25,10 @@ export default dispatch => {
                 dispatch(removeIntention(record.id));
                 break;
             case 'exchangecreated':
-                dispatch();
+                dispatch(alertExchanged("TODO: message"));
                 break;
             default:
-                throw new Error(`unknown channel: ${channel}`)
+                // throw new Error(`unknown channel: ${channel}`)
         }
     };
 

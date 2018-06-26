@@ -1,7 +1,8 @@
 import React from 'react'
 import Login from './Login'
-import {Navbar, Nav, NavDropdown, MenuItem, Button} from 'react-bootstrap'
+import {Navbar, Nav, NavDropdown, MenuItem, Button, NavItem} from 'react-bootstrap'
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 class NavigationHeader extends React.Component{
     render() {
@@ -9,12 +10,18 @@ class NavigationHeader extends React.Component{
             <Navbar>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="/">Mariola</a>
+                        <Link to="">
+                            <span>Mariola</span>
+                        </Link>
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Nav className="pull-right">
-                    <Issues/>
-                    <Login style="vertical-align: middle"/>
+                    <NavItem>
+                        <Issues/>
+                    </NavItem>
+                    <NavItem>
+                        <Login/>
+                    </NavItem>
                 </Nav>
             </Navbar>
         )
