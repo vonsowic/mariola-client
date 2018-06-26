@@ -6,7 +6,7 @@ import {callGetFacultyGroups, callJoinToFaculty, closeJoinToFaculty} from '../ac
 class Container extends React.Component {
    render() {
         if( this.props.isOpen) {
-            this.getGroupsIfNeccessary();
+            this._getGroupsIfNecessary();
 
             return <JoinToFaculty
                 isOpen={this.props.isOpen}
@@ -18,7 +18,7 @@ class Container extends React.Component {
         } else return null
     }
 
-    getGroupsIfNeccessary() {
+    _getGroupsIfNecessary() {
        if ( this.props.groups.length === 0) {
            this.props.dispatch(callGetFacultyGroups(this.props.faculty));
        }
