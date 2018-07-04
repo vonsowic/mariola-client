@@ -17,7 +17,7 @@ class App extends Component {
             <BrowserRouter>
                 <div>
                     <NavigationHeader/>
-                    <div>
+                    <div className="container">
                         <AlertList
                             onDismiss={({id}) => this.props.dispatch(dismissAlert(id))}
                             timeout={this.props.alerts.length > 0 ? this.props.alerts[0].timeout : 0}

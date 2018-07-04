@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, ListGroup, ListGroupItem, OverlayTrigger, Tooltip} from "react-bootstrap";
+import { ListGroup, ListGroupItem, OverlayTrigger, Tooltip} from "react-bootstrap";
 
 
 const tooltip = (
@@ -11,6 +11,7 @@ const tooltip = (
 export default function (props) {
     return (
         <div>
+            <h1>Dołącz do kierunku</h1>
             <ListGroup>
                 {props.faculties.length > 0
                     ? props.faculties.map(f =>
@@ -19,9 +20,8 @@ export default function (props) {
                                 <span onClick={() => props.onJoinClicked(f)}>{f.name}</span>
                             </OverlayTrigger>
                         </ListGroupItem>)
-                : <p>Jesteś już we wszystkich możliwych kierunkach &#x1F628;</p>}
+                : <p>Brak możliwych kierunków do dołączenia</p>}
             </ListGroup>
-            <Button>Lub utwórz nowy</Button>
         </div>
     )
 }

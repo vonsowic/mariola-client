@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from "react-redux";
 import FacultiesList from "../components/FacultiesList";
-import {callGetNotMyFaculties, openCreateFaculty, openJoinToFaculty} from "../actions/faculties";
+import {callGetNotMyFaculties, openJoinToFaculty} from "../actions/faculties";
 
 class Container extends React.Component {
     componentDidMount() {
@@ -12,7 +12,6 @@ class Container extends React.Component {
         return <FacultiesList
             faculties={this.props.faculties}
             onJoinClicked={faculty => this.props.dispatch(openJoinToFaculty(faculty))}
-            onCreateClicked={() => this.props.dispatch(openCreateFaculty())}
         />
     }
 }

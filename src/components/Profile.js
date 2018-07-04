@@ -13,7 +13,7 @@ export default class Profile extends React.Component {
                 <MenuItem divider />
                 {this.props.faculties.map(f =>
                     <MenuItem key={f.id}>
-                        <NavLink to={`/${f.id}/home`}>{f.name}</NavLink>
+                        <NavLink to={`/${f.id}/plan`}>{f.name}</NavLink>
                     </MenuItem>
                 )}
                 <MenuItem divider />

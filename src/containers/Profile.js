@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import FacebookLogin from "react-facebook-login";
+import FacebookLogin from "../components/react-facebook-login";
 import { connect } from "react-redux";
 import Profile from '../components/Profile'
 import {callLogin, logout} from '../actions/authorization'
 import {callGetMyFaculties} from "../actions/faculties";
+import {Button} from "react-bootstrap";
 
 
-class Login extends Component {
+class Container extends Component {
     componentDidMount(){
         // TODO: move to another component, so it wont be called every time profile is rendered
         this.props.dispatch(callGetMyFaculties())
@@ -21,13 +22,15 @@ class Login extends Component {
                 faculties={this.props.myFaculties}
                 onLogout={()=>this.props.dispatch(logout())}
             />
-            : <FacebookLogin
-                appId={process.env.FACEBOOK_ID || "2124361614460680"}
-                autoLoad={false}
-                fields="name,email,picture"
-                cssClass="btn-facebook"
-                callback={fbResponse => this.props.dispatch(callLogin(fbResponse))}
-            />
+            : <div>
+                <FacebookLogin
+                    appId={process.env.FACEBOOK_ID || "2124361614460680"}
+                    autoLoad={false}
+                    fields="name,email,picture"
+                    callback={fbResponse => this.props.dispatch(callLogin(fbResponse))}
+                    render={renderProps => <Button onClick={renderProps.onClick}>Zaloguj</Button>}
+                />
+            </div>
     }
 
     isLoggedIn(){
@@ -44,4 +47,4 @@ function mapStateToProps({user, myFaculties}) {
     }
 }
 
-export default connect(mapStateToProps)(Login)
+export default connect(mapStateToProps)(Container)

@@ -9,7 +9,6 @@ export default function Sidebar({facultyId, isAdmin}) {
             <Navbar fluid>
                 <Navbar.Collapse>
                     <Nav>
-                        <NavItem><Link to={`/${facultyId}/home`}>Strona główna kierunku</Link></NavItem>
                         <NavItem><Link to={`/${facultyId}/plan`}>Plan zajęć</Link></NavItem>
                         <NavItem><Link to={`/${facultyId}/exchanges`}>Centrum wymian</Link></NavItem>
                         { isAdmin

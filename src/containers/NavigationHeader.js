@@ -1,5 +1,5 @@
 import React from 'react'
-import Login from './Login'
+import Login from './Profile'
 import {Navbar, Nav, NavDropdown, MenuItem, Button, NavItem} from 'react-bootstrap'
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
