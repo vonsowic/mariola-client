@@ -1,6 +1,6 @@
 import {callGetIntentions, removeIntention} from "./actions/intentions";
 import Sockette from "sockette";
-import {alertExchanged} from "./actions/alert";
+import { callGetExchangeInfo } from "./actions/exchanges";
 
 
 export default dispatch => {
@@ -9,7 +9,7 @@ export default dispatch => {
         maxAttempts: 10,
         onopen: () => ws.json({
             userId: 1,
-            facultyIds: [6]
+            facultyIds: [1] // TODO: get ids from token
         }),
         onmessage: ({data}) => handleMessage(JSON.parse(data)),
         onerror: e => console.log('Error:', e),
@@ -25,10 +25,10 @@ export default dispatch => {
                 dispatch(removeIntention(record.id));
                 break;
             case 'exchangecreated':
-                dispatch(alertExchanged("TODO: message"));
+                dispatch(callGetExchangeInfo(record));
                 break;
             default:
-                // throw new Error(`unknown channel: ${channel}`)
+
         }
     };
 
