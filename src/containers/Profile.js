@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import FacebookLogin from "../components/react-facebook-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { connect } from "react-redux";
 import Profile from '../components/Profile'
 import {callLogin, logout} from '../actions/authorization'
 import {callGetMyFaculties} from "../actions/faculties";
-import {Button} from "react-bootstrap";
-
+import {Nav} from "react-bootstrap";
+import {FacebookLoginButton} from "react-social-login-buttons";
 
 class Container extends Component {
     componentDidMount(){
@@ -22,15 +22,17 @@ class Container extends Component {
                 faculties={this.props.myFaculties}
                 onLogout={()=>this.props.dispatch(logout())}
             />
-            : <div>
+            : <Nav>
                 <FacebookLogin
                     appId={process.env.FACEBOOK_ID || "2124361614460680"}
                     autoLoad={false}
                     fields="name,email,picture"
                     callback={fbResponse => this.props.dispatch(callLogin(fbResponse))}
-                    render={renderProps => <Button onClick={renderProps.onClick}>Zaloguj</Button>}
+                    render={renderProps => (
+                        <FacebookLoginButton onClick={renderProps.onClick} >Facebook</FacebookLoginButton>
+                    )}
                 />
-            </div>
+            </Nav>
     }
 
     isLoggedIn(){

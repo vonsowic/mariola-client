@@ -21,6 +21,7 @@ class IntentionsList extends Component {
 
 function mapStateToProps(state){
     return {
+        facultyId: state.visibleFaculty.id,
         intentions: state.intentions,
         userId: state.user.id
     }

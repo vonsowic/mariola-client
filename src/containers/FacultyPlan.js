@@ -8,8 +8,8 @@ class FacultyPlan extends React.Component {
     render() {
         return (
             <BaseCalendarContainer
-                callGet={() => this.props.dispatch(
-                    callGetDetailedCourses(this.props.facultyId, this.props.start, this.props.end)
+                callGet={weekDate => this.props.dispatch(
+                    callGetDetailedCourses(this.props.facultyId, weekDate)
                 )}/>
         )
     }
@@ -17,8 +17,7 @@ class FacultyPlan extends React.Component {
 
 function mapStateToProps(state){
     return {
-        start: state.calendar.start,
-        end: state.calendar.end,
+        facultyId: state.visibleFaculty.id,
     }
 }
 

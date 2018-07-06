@@ -1,6 +1,6 @@
 import React from 'react'
 import {Nav, NavItem, Navbar} from 'react-bootstrap';
-import {Link} from "react-router-dom";
+import {LinkContainer} from "react-router-bootstrap";
 
 
 export default function Sidebar({facultyId, isAdmin}) {
@@ -9,10 +9,10 @@ export default function Sidebar({facultyId, isAdmin}) {
             <Navbar fluid>
                 <Navbar.Collapse>
                     <Nav>
-                        <NavItem><Link to={`/${facultyId}/plan`}>Plan zajęć</Link></NavItem>
-                        <NavItem><Link to={`/${facultyId}/exchanges`}>Centrum wymian</Link></NavItem>
+                        <LinkContainer to={`/${facultyId}/plan`}><NavItem>Plan zajęć</NavItem></LinkContainer>
+                        <LinkContainer to={`/${facultyId}/exchanges`}><NavItem>Centrum wymian</NavItem></LinkContainer>
                         { isAdmin
-                            ? <NavItem><Link to={`/${facultyId}/settings`}>Ustawienia</Link></NavItem>
+                            ? <LinkContainer to={`/${facultyId}/settings`}><NavItem>Panel starosty</NavItem></LinkContainer>
                             : null
                         }
                     </Nav>

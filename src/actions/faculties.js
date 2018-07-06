@@ -1,10 +1,10 @@
 import request from 'axios'
-import {visibleFaculty} from "../reducers/faculties";
 
 
 export const callGetMyFaculties = () =>
     dispatch => request.get('/api/faculties?onlyMy=true')
         .then(({data}) => dispatch(addMyFaculties(data)));
+
 
 export const addMyFaculties = faculties => ({
     type: 'ADD_MY_FACULTIES',
@@ -15,6 +15,7 @@ export const addMyFaculties = faculties => ({
 export const callGetNotMyFaculties = () =>
     dispatch => request.get('/api/faculties?onlyMy=false')
         .then(({data}) => dispatch(setFaculties(data)));
+
 
 const setFaculties = faculties =>  ({
     type: 'SET_FACULTIES',
@@ -27,9 +28,11 @@ export const openJoinToFaculty = faculty => ({
     faculty
 });
 
+
 export const closeJoinToFaculty = () => ({
     type: 'CLOSE_JOIN_TO_FACULTY'
 });
+
 
 export const callJoinToFaculty = (faculty, initialGroup) =>
     dispatch => {
@@ -41,18 +44,30 @@ export const callJoinToFaculty = (faculty, initialGroup) =>
         })
     };
 
+
 export const callGetFacultyGroups = faculty =>
     dispatch => request.get(`api/faculties/${faculty.id}/groups`)
         .then(({data}) => dispatch(setFacultyGroups(data)));
 
 
-export const setFacultyGroups = groups => ({
+const setFacultyGroups = groups => ({
     type: 'SET_FACULTY_GROUPS',
     groups
 });
 
 
-export const setVisibleFaculty = visibleFacultyId => ({
-    type: 'SET_VISIBLE_FACULTY',
-    visibleFacultyId
+export const setVisibleFacultyId = facultyId => ({
+    type: 'SET_VISIBLE_FACULTY_ID',
+    facultyId
+});
+
+
+export const callGetFaculty = facultyId =>
+    dispatch => request.get('/api/faculties/' + facultyId)
+        .then(({data}) => dispatch(setFaculty(data)));
+
+
+const setFaculty = faculty => ({
+    type: 'SET_FACULTY',
+    faculty
 });

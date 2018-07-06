@@ -2,7 +2,8 @@ import request from 'axios'
 import moment from "moment/moment";
 
 export const callGetCourses = facultyId =>
-    dispatch => request.get(`/api/plan/${facultyId}/general`)
+    dispatch => request
+        .get('/api/plan/general', {params: {facultyId}})
         .then(({data}) => data.map(c => fromGeneralToCalendarFormat(c)))
         .then(cs => dispatch(setCourses(cs)));
 
@@ -22,27 +23,29 @@ const convertCourseDateToCalendarFormat = (dayOfWeek, time) => {
     )
 };
 
-export const callGetMyCourses = (start, end) =>
-    dispatch => request.get("/api/plan/my", {
-        params: {
-            start,
-            end,
-        }
-    })
+export const callGetMyCourses = (weekDate) =>
+    dispatch => request
+        .get("/api/plan/my", {
+            params: startEndOfWeek()
+        })
         .then(({data}) => data.map(toCalendarFormat))
         .then(cs => dispatch(setCourses(cs)));
 
 
-export const callGetDetailedCourses = (facultyId, start, end) =>
-    dispatch => request.get(`/api/plan/${facultyId}`, {
-        params: {
-            start,
-            end,
-        }
-    })
+export const callGetDetailedCourses = (facultyId, weekDate) =>
+    dispatch => request
+        .get('/api/plan', {
+            params: Object.assign(startEndOfWeek(weekDate), {
+                facultyId
+            })
+        })
         .then(({data}) => data.map(toCalendarFormat))
         .then(cs => dispatch(setCourses(cs)));
 
+const startEndOfWeek = weekDate => ({
+    start: moment(weekDate).add(1 - weekDate.getDay(), 'days').hour(0).minute(0).second(0).toDate(),
+    end: moment(weekDate).add(7 - weekDate.getDay(), 'days').hour(0).minute(0).second(0).toDate(),
+});
 
 const toCalendarFormat = e => ({
     title: e.name,
@@ -58,11 +61,17 @@ export const setCourses = courses => ({
 
 
 export const callGetMyCoursesIds = () =>
-    dispatch => request.get('/api/plan/my/ids')
+    dispatch => request
+        .get('/api/plan/my/ids')
         .then(({data}) => dispatch(addMyCoursesIds(data)));
 
 
 export const addMyCoursesIds = ids => ({
     type: 'ADD_MY_COURSES_IDS',
     ids
+});
+
+export const removeFromMyCoursesIds = id => ({
+    type: 'REMOVE_MY_COURSE_ID',
+    id
 });

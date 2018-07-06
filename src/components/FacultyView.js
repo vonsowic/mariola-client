@@ -16,10 +16,10 @@ export default ({url, facultyId, isAdmin}) => (
         <div className="col-sm-10">
             <Route
                 path={`${url}/exchanges`}
-                render={() => <ExchangePanel facultyId={facultyId}/>}/>
+                render={() => <ExchangePanel/>}/>
             <Route
                 path={`${url}/plan`}
-                component={() => <FacultyPlan facultyId={facultyId}/>}/>
+                component={() => <FacultyPlan/>}/>
             <Route
                 path={`${url}/settings`}
                 component={AdminPanel}/>

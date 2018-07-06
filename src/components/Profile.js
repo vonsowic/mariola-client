@@ -1,25 +1,24 @@
 import React from 'react'
 import {MenuItem, NavDropdown} from "react-bootstrap";
-import {NavLink} from "react-router-dom";
+import {LinkContainer} from "react-router-bootstrap";
 
 
 export default class Profile extends React.Component {
     render(){
         return (
             <NavDropdown eventKey={3} title={`Witaj, ${this.props.name}`} id="basic-nav-dropdown">
-                <MenuItem>
-                    <NavLink to={`/myplan`}>Mój plan</NavLink>
-                </MenuItem>
+                <LinkContainer to={`/myplan`}>
+                    <MenuItem>Mój plan</MenuItem>
+                </LinkContainer>
+
                 <MenuItem divider />
                 {this.props.faculties.map(f =>
-                    <MenuItem key={f.id}>
-                        <NavLink to={`/${f.id}/plan`}>{f.name}</NavLink>
-                    </MenuItem>
+                    <LinkContainer key={f.id} to={`/${f.id}/plan`}>
+                        <MenuItem>{f.name}</MenuItem>
+                    </LinkContainer>
                 )}
                 <MenuItem divider />
-                <MenuItem onClick={() => {
-                    this.props.onLogout()
-                }}>Wyloguj się</MenuItem>
+                <MenuItem onClick={this.props.onLogout}>Wyloguj się</MenuItem>
             </NavDropdown>)
 
     }

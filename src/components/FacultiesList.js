@@ -15,7 +15,7 @@ export default function (props) {
             <ListGroup>
                 {props.faculties.length > 0
                     ? props.faculties.map(f =>
-                        <ListGroupItem>
+                        <ListGroupItem key={f.id}>
                             <OverlayTrigger placement="right" overlay={tooltip}>
                                 <span onClick={() => props.onJoinClicked(f)}>{f.name}</span>
                             </OverlayTrigger>

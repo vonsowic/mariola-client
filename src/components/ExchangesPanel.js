@@ -2,8 +2,8 @@ import React from 'react'
 import IntentionsList from '../containers/IntentionsList'
 import GeneralPlan from '../containers/GeneralPlan'
 
-export default props => (
+export default () => (
     <div>
-        <GeneralPlan facultyId={props.facultyId}/>
-        <IntentionsList facultyId={props.facultyId}/>
+        <GeneralPlan/>
+        <IntentionsList/>
     </div>)

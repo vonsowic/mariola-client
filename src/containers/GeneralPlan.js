@@ -7,12 +7,13 @@ import { connect } from 'react-redux'
 import {callGetCourses, callGetMyCoursesIds} from "../actions/courses";
 import {callPostIntention} from "../actions/intentions";
 import {select, deselect} from "../actions/calendar";
+import Help from "./Info";
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 class GeneralPlan extends Component {
     componentDidMount(){
-        this.props.dispatch(callGetCourses(this.props.facultyId))
+        this.props.dispatch(callGetCourses(this.props.facultyId));
         this.props.dispatch(callGetMyCoursesIds())
     }
 
@@ -35,6 +36,8 @@ class GeneralPlan extends Component {
                         <Button onClick={closeModal}>Nie</Button>
                     </Modal.Footer>
                 </Modal>
+
+                <Help/>
 
                 <BigCalendar
                     toolbar={false}
@@ -74,6 +77,7 @@ class GeneralPlan extends Component {
 
 function mapStateToProps(state) {
     return {
+        facultyId: state.visibleFaculty.id,
         courses: state.courses,
         selectedCourseId: state.calendar.selectedCourseId,
         myCoursesIds: state.myCoursesIds

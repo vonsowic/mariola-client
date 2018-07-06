@@ -1,8 +1,7 @@
 import React from 'react'
-import Login from './Profile'
-import {Navbar, Nav, NavDropdown, MenuItem, Button, NavItem} from 'react-bootstrap'
-import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+import Profile from './Profile'
+import {Navbar, Nav, NavDropdown, MenuItem} from 'react-bootstrap'
+import {LinkContainer} from "react-router-bootstrap";
 
 class NavigationHeader extends React.Component{
     render() {
@@ -10,18 +9,14 @@ class NavigationHeader extends React.Component{
             <Navbar>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <Link to="">
+                        <LinkContainer to="">
                             <span>Mariola</span>
-                        </Link>
+                        </LinkContainer>
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Nav className="pull-right">
-                    <NavItem>
-                        <Issues/>
-                    </NavItem>
-                    <NavItem>
-                        <Login/>
-                    </NavItem>
+                    <Issues/>
+                    <Profile/>
                 </Nav>
             </Navbar>
         )
@@ -41,4 +36,4 @@ function Issues() {
     )
 }
 
-export default connect()(NavigationHeader)
+export default NavigationHeader

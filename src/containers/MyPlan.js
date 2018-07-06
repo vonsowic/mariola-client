@@ -7,15 +7,17 @@ import BaseCalendarContainer from "./BaseCalendarContainer";
 class MyPlan extends React.Component {
     render() {
         return (
-            <BaseCalendarContainer callGet={() => this.props.dispatch(callGetMyCourses(this.props.start, this.props.end))}/>
+            <BaseCalendarContainer
+                callGet={weekDate => this.props
+                    .dispatch(
+                        callGetMyCourses(weekDate))}
+            />
         )
     }
 }
 
-function mapStateToProps(state){
+function mapStateToProps() {
     return {
-        start: state.calendar.start,
-        end: state.calendar.end,
     }
 }
 

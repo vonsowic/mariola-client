@@ -16,16 +16,21 @@ export const removeIntention = intentionId => ({
 });
 
 export const callGetIntentions = (facultyId, intentionId='') =>
-        dispatch => request.get(`/api/intentions/${facultyId}/${intentionId}`)
-            .then(({data}) => intentionId
-                ? dispatch(addIntentions(data))
-                : dispatch(setIntentions(data)));
+    dispatch => request
+        .get(`/api/intentions/${intentionId}`, {
+            params: {facultyId}
+        })
+        .then(({data}) => intentionId
+            ? dispatch(addIntentions(data))
+            : dispatch(setIntentions(data)));
 
 
 export const callDeleteIntention = intentionId =>
-    dispatch => request.delete(`/api/intentions/${intentionId}`)
+    dispatch => request
+        .delete(`/api/intentions/${intentionId}`)
         .then(() => dispatch(removeIntention(intentionId)));
 
 
 export const callPostIntention = forId =>
-    () => request.post('/api/intentions', { forId });
+    () => request
+        .post('/api/intentions', { forId });

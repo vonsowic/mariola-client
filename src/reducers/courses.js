@@ -11,6 +11,9 @@ export const myCoursesIds = (state=[], action) => {
     switch (action.type){
         case 'ADD_MY_COURSES_IDS':
             return state.concat(action.ids);
+        case 'REMOVE_MY_COURSE_ID':
+            console.log(action.id)
+            return state.filter(id => id !== action.id);
         default:
             return state
     }

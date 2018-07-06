@@ -31,10 +31,10 @@ export default class IntentionsList extends Component {
 function IntentionListElement(props){
     const i = props.content;
     return <tr>
-            <td>{i.course}</td>
-            <td>{i.userName} {i.userLastName}</td>
-            <td>{i.whatGroup}</td>
-            <td>{i.forGroup}</td>
+            <td>{i.what.name}</td>
+            <td>{i.from.name} {i.from.lastName}</td>
+            <td>{i.what.group}</td>
+            <td>{i.for.group}</td>
             {i.userId === props.userId
                 ? <td><Button bsStyle="danger" onClick={() => props.onDeleteIntention(i.id)}>Usuń</Button></td>
                 : <td/>}

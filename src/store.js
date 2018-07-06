@@ -3,7 +3,7 @@ import {applyMiddleware, createStore} from "redux";
 import thunkMiddleware from "redux-thunk";
 import { tokenToUser } from './utils'
 
-const store = createStore(
+export default createStore(
     rootReducer, {
         user: Object.assign(
             {},
@@ -13,5 +13,3 @@ const store = createStore(
     },
     applyMiddleware(thunkMiddleware,)
 );
-
-export default store;
