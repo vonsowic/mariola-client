@@ -3,7 +3,7 @@ import Sidebar from './Sidebar'
 import ExchangePanel from './ExchangesPanel'
 import {Route} from "react-router-dom";
 import FacultyPlan from "../containers/FacultyPlan";
-import AdminPanel from "../containers/AdminPanel";
+import AdminPanel from "../containers/admin/AdminPanel";
 
 
 export default ({url, facultyId, isAdmin}) => (

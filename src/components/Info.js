@@ -1,14 +1,9 @@
 import React from "react";
 import {ButtonToolbar, Glyphicon, OverlayTrigger, Popover} from "react-bootstrap";
 
-const info = ({faculty}) => (
-    <Popover id='info-icon' title="Wymiany">
-        <p>{!faculty.exchangesEnabled
-            ? 'zablokowane'
-            : faculty.transferWithoutExchangeEnabled
-                ? 'możliwe w miarę istniejących miejsc'
-                : 'możliwe tylko w przypadku znalezienia zastępstwa'
-        }</p>
+const info = props => (
+    <Popover id="info-popover" title={props.title}>
+        <p>{props.body}</p>
     </Popover>);
 
 

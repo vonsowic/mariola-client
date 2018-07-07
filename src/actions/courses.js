@@ -26,7 +26,7 @@ const convertCourseDateToCalendarFormat = (dayOfWeek, time) => {
 export const callGetMyCourses = (weekDate) =>
     dispatch => request
         .get("/api/plan/my", {
-            params: startEndOfWeek()
+            params: startEndOfWeek(weekDate)
         })
         .then(({data}) => data.map(toCalendarFormat))
         .then(cs => dispatch(setCourses(cs)));
@@ -48,6 +48,7 @@ const startEndOfWeek = weekDate => ({
 });
 
 const toCalendarFormat = e => ({
+    id: e.id,
     title: e.name,
     start: new Date(e["courses_details.start"]),
     end: new Date(e["courses_details.end"]),
@@ -59,6 +60,10 @@ export const setCourses = courses => ({
     courses
 });
 
+export const updateGeneralCourse = course => ({
+    type: 'UPDATE_COURSE',
+    course
+});
 
 export const callGetMyCoursesIds = () =>
     dispatch => request

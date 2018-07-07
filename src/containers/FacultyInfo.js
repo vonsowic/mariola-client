@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Help from "../components/Info";
+import FacultyInfo from "../components/FacultyInfo";
 import {connect} from "react-redux";
 import {callGetFaculty} from "../actions/faculties";
 
@@ -12,7 +12,7 @@ class Container extends Component {
     }
 
     render() {
-        return <Help
+        return <FacultyInfo
             faculty={this.props.faculty}
         />
     }

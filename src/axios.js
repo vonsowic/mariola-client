@@ -32,7 +32,7 @@ export default dispatch => {
                 dispatch(alertError(err.response.data.message))
             }
 
-            return err
+            throw err
         }
     );
 };

@@ -35,7 +35,7 @@ function IntentionListElement(props){
             <td>{i.from.name} {i.from.lastName}</td>
             <td>{i.what.group}</td>
             <td>{i.for.group}</td>
-            {i.userId === props.userId
+            {i.from.id === props.userId
                 ? <td><Button bsStyle="danger" onClick={() => props.onDeleteIntention(i.id)}>Usuń</Button></td>
                 : <td/>}
         </tr>

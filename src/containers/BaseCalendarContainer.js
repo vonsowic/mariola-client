@@ -38,7 +38,7 @@ class BaseCalendarContainer extends React.Component {
 
 function mapStateToProps(state){
     return {
-        courses: state.courses,
+        courses: Object.values(state.courses),
         date: state.calendar.date,
     }
 }

@@ -16,7 +16,7 @@ export const callGetExchangeInfo = exchanged =>
     dispatch => request
             .get(`/api/exchanges/${exchanged.id}`)
             .then(({data}) => {
-                dispatch(addMyCoursesIds(data.id));
                 dispatch(removeFromMyCoursesIds(data.previousId));
+                dispatch(addMyCoursesIds(data.id));
                 dispatch(alertExchanged(`${data.name}: jesteś teraz w grupie ${data.group}`))
             });

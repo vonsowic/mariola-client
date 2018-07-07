@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import {callGetCourses, callGetMyCoursesIds} from "../actions/courses";
 import {callPostIntention} from "../actions/intentions";
 import {select, deselect} from "../actions/calendar";
-import Help from "./Info";
+import Help from "./FacultyInfo";
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
@@ -78,7 +78,7 @@ class GeneralPlan extends Component {
 function mapStateToProps(state) {
     return {
         facultyId: state.visibleFaculty.id,
-        courses: state.courses,
+        courses: Object.values(state.courses),
         selectedCourseId: state.calendar.selectedCourseId,
         myCoursesIds: state.myCoursesIds
     }
