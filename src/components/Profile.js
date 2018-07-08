@@ -12,11 +12,14 @@ export default class Profile extends React.Component {
                 </LinkContainer>
 
                 <MenuItem divider />
-                {this.props.faculties.map(f =>
-                    <LinkContainer key={f.id} to={`/${f.id}/plan`}>
-                        <MenuItem>{f.name}</MenuItem>
-                    </LinkContainer>
-                )}
+                { this.props.faculties.length !== 0
+                    ? this.props.faculties.map(f =>
+                        <LinkContainer key={f.id} to={`/${f.id}/plan`}>
+                            <MenuItem>{f.name}</MenuItem>
+                        </LinkContainer>)
+                    : <MenuItem>0 Twoich kierunków</MenuItem>
+                }
+
                 <MenuItem divider />
                 <MenuItem onClick={this.props.onLogout}>Wyloguj się</MenuItem>
             </NavDropdown>)

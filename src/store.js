@@ -5,11 +5,7 @@ import { tokenToUser } from './utils'
 
 export default createStore(
     rootReducer, {
-        user: Object.assign(
-            {},
-            { profileImageUrl: localStorage.getItem('profileImageUrl') },
-            tokenToUser(localStorage.getItem('token'))
-        )
+        user: tokenToUser(localStorage.getItem('token'))
     },
     applyMiddleware(thunkMiddleware,)
 );

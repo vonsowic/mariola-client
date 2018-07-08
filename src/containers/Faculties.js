@@ -11,18 +11,20 @@ class Container extends React.Component {
 
     render() {
         return <div>
-            <JoinToFaculty/>
-            <FacultiesList
-                faculties={this.props.faculties}
-                onJoinClicked={faculty => this.props.dispatch(openJoinToFaculty(faculty))}
-            />
-        </div>
+                <JoinToFaculty/>
+                <FacultiesList
+                    isLoggedIn={this.props.isLoggedIn}
+                    faculties={this.props.faculties}
+                    onJoinClicked={faculty => this.props.dispatch(openJoinToFaculty(faculty))}
+                />
+            </div>
     }
 }
 
 function mapStateToProps(state) {
     return {
-        faculties: state.faculties
+        faculties: state.faculties,
+        isLoggedIn: state.user.id
     }
 }
 

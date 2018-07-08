@@ -8,6 +8,7 @@ import {callGetCourses, callGetMyCoursesIds} from "../actions/courses";
 import {callPostIntention} from "../actions/intentions";
 import {select, deselect} from "../actions/calendar";
 import Help from "./FacultyInfo";
+import CalendarEvent from "../components/CalendarEvent";
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
@@ -48,6 +49,7 @@ class GeneralPlan extends Component {
                     views={["work_week"]}
                     eventPropGetter={event => ({
                             style: {
+                                opacity: event.group === '0' ? 0.5 : 1.0,
                                 backgroundColor: this.props.myCoursesIds.includes(event.id)
                                     ? "#ad4ca4"
                                     : "#3174ad",
@@ -55,6 +57,9 @@ class GeneralPlan extends Component {
                     })}
                     style={{
                         height: "100vh",
+                    }}
+                    components={{
+                        event: CalendarEvent
                     }}
                     min={new Date(moment().hour(7).minute(0))}
                     max={new Date(moment().hour(21).minute(0))}

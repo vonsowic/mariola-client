@@ -1,4 +1,6 @@
 import request from 'axios'
+import {callRefresh} from "./authorization";
+import {alertInfo} from "./alert";
 
 
 export const callGetMyFaculties = () =>
@@ -38,10 +40,16 @@ export const callJoinToFaculty = (faculty, initialGroup) =>
     dispatch => {
         dispatch(closeJoinToFaculty());
 
-        return request.post("/api/faculties/join", {
-            facultyId: faculty.id,
-            initialGroup
-        })
+        return request
+            .post("/api/faculties/join", {
+                facultyId: faculty.id,
+                initialGroup
+            })
+            .then(() => {
+                dispatch(alertInfo(`Jesteś teraz członkiem kierunku ${faculty.name}`));
+                return dispatch(callRefresh())
+                    .then(() => setTimeout(() => window.location.replace(`/${faculty.id}/exchanges`), 1000))
+            })
     };
 
 

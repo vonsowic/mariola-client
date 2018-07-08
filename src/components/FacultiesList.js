@@ -12,16 +12,19 @@ export default function (props) {
     return (
         <div>
             <h1>Dołącz do kierunku</h1>
-            <ListGroup>
-                {props.faculties.length > 0
-                    ? props.faculties.map(f =>
-                        <ListGroupItem key={f.id}>
-                            <OverlayTrigger placement="right" overlay={tooltip}>
-                                <span onClick={() => props.onJoinClicked(f)}>{f.name}</span>
-                            </OverlayTrigger>
-                        </ListGroupItem>)
-                : <p>Brak możliwych kierunków do dołączenia</p>}
-            </ListGroup>
+            {props.isLoggedIn
+            ? <ListGroup>
+                    {props.faculties.length > 0
+                        ? props.faculties.map(f =>
+                            <ListGroupItem key={f.id}>
+                                <OverlayTrigger placement="right" overlay={tooltip}>
+                                    <span onClick={() => props.onJoinClicked(f)}>{f.name}</span>
+                                </OverlayTrigger>
+                            </ListGroupItem>)
+                        : <p>Brak możliwych kierunków do dołączenia</p>}
+                </ListGroup>
+            : <div>...ale najpierw się zaloguj</div>}
+
         </div>
     )
 }

@@ -11,13 +11,15 @@ class Container extends React.Component {
     render() {
         return <FacultyView
             url={this.props.match.url}
-            facultyId={this.props.match.params.facultyId}
-            isAdmin={this.props.faculties[this.props.match.params.facultyId].isAdmin}/>
+            facultyId={this.props.faculty.id}
+            isAdmin={this.props.isAdmin}/>
     }
 }
 
 function mapStateToProps(state){
     return {
+        faculty: state.visibleFaculty,
+        isAdmin: state.user.faculties[state.visibleFaculty.id] ? state.user.faculties[state.visibleFaculty.id].isAdmin : false,
         faculties: state.user.faculties
     }
 }

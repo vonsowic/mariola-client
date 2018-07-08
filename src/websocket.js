@@ -3,13 +3,16 @@ import Sockette from "sockette";
 import { callGetExchangeInfo } from "./actions/exchanges";
 
 
-export default dispatch => {
-    const ws = new Sockette('ws://localhost:5001', {
+export default store => {
+    const { user } = store.getState();
+    const facultiesIds = Object.keys(user.faculties);
+
+    const ws = new Sockette(process.env.REACT_APP_NOTIFICATION_URL || 'ws://localhost:5001', {
         timeout: 5e3,
         maxAttempts: 10,
         onopen: () => ws.json({
-            userId: 1,
-            facultyIds: [1] // TODO: get ids from token
+            userId: user.id,
+            facultyIds: facultiesIds
         }),
         onmessage: ({data}) => handleMessage(JSON.parse(data)),
         onerror: e => console.log('Error:', e),
@@ -19,16 +22,16 @@ export default dispatch => {
     const handleMessage = ({channel, record}) => {
         switch (channel) {
             case 'intentioncreated':
-                dispatch(callGetIntentions(record.facultyId, record.id));
+                store.dispatch(callGetIntentions(record.facultyId, record.id));
                 break;
             case 'intentionremoved':
-                dispatch(removeIntention(record.id));
+                store.dispatch(removeIntention(record.id));
                 break;
             case 'exchangecreated':
-                dispatch(callGetExchangeInfo(record));
+                store.dispatch(callGetExchangeInfo(record));
                 break;
             default:
-
+                break
         }
     };
 

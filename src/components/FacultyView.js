@@ -15,14 +15,16 @@ export default ({url, facultyId, isAdmin}) => (
         </div>
         <div className="col-sm-10">
             <Route
-                path={`${url}/exchanges`}
+                exact path={`${url}/exchanges`}
                 render={() => <ExchangePanel/>}/>
             <Route
-                path={`${url}/plan`}
+                exact path={`${url}/plan`}
                 component={() => <FacultyPlan/>}/>
-            <Route
-                path={`${url}/settings`}
-                component={AdminPanel}/>
+            { isAdmin
+                ? <Route
+                    exact path={`${url}/settings`}
+                    component={AdminPanel}/>
+                : null }
         </div>
     </div>
 

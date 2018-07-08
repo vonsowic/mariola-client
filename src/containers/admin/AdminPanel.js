@@ -101,8 +101,8 @@ function ListPanel(props) {
 function mapStateToProps(state){
     return {
         faculty: state.visibleFaculty,
-        modalVisible: state.admin.visible,
-        panelType: state.admin.panelType
+        modalVisible: state.adminPanel.visible,
+        panelType: state.adminPanel.panelType
     }
 }
 

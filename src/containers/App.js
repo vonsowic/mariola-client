@@ -18,12 +18,12 @@ class App extends Component {
                     <NavigationHeader/>
                     <div className="container">
                         <AlertList
-                            onDismiss={({id}) => this.props.dispatch(dismissAlert(id))}
+                            onDismiss={alert => this.props.dispatch(dismissAlert(alert))}
                             timeout={this.props.alerts.length > 0 ? this.props.alerts[0].timeout : 0}
                             alerts={this.props.alerts} />
                         <Switch>
                             <Route exact path='/' component={HomePage}/>
-                            <Route path='/myplan' component={MyPlan}/>
+                            <Route exact path='/myplan' component={MyPlan}/>
                             <Route path='/:facultyId' component={FacultyView}/>
                             <Route path='/*' component={NotFound}/>
                         </Switch>

@@ -16,7 +16,6 @@
     "axios": "^0.18.0",
     "jwt-decode": "^2.2.0",
     "moment": "^2.22.2",
-    "parcel-bundler": "^1.9.4",
     "react": "^16.4.0",
     "react-big-calendar": "^0.19.1",
     "react-bootstrap": "^0.32.1",
@@ -38,6 +37,5 @@
     "prop-types": "^15.6.2",
     "react-scripts": "^1.1.4"
   },
-  "homepage": "./",
-  "proxy": "http://localhost:5000"
+  "homepage": "./"
 }

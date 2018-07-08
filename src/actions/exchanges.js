@@ -2,11 +2,6 @@ import request from "axios/index";
 import {addMyCoursesIds, removeFromMyCoursesIds} from "./courses";
 import {alertExchanged} from "./alert";
 
-export const addExchange = exchange => ({
-    type: 'ADD_EXCHANGE',
-    exchange
-});
-
 export const setExchanges = exchanges => ({
     type: 'SET_EXCHANGES',
     exchanges
@@ -18,5 +13,12 @@ export const callGetExchangeInfo = exchanged =>
             .then(({data}) => {
                 dispatch(removeFromMyCoursesIds(data.previousId));
                 dispatch(addMyCoursesIds(data.id));
-                dispatch(alertExchanged(`${data.name}: jesteś teraz w grupie ${data.group}`))
+                dispatch(alertExchanged(data, exchanged.id))
             });
+
+export const callGetExchanges = ({id}) =>
+    dispatch => request
+        .get(`/api/exchanges?facultyId=${id}`)
+        .then(({data}) => dispatch(setExchanges(data)));
+
+

@@ -13,8 +13,8 @@ export const tokenToUser = token => {
     } catch (err) {
         return {
             id: null,
-            name: '',
-            lastName: '',
+            name: null,
+            lastName: null,
             faculties: []
         }
     }

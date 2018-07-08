@@ -2,11 +2,12 @@ import { combineReducers } from 'redux'
 import intentions from './intentions'
 import {courses, myCoursesIds} from "./courses";
 import calendar from './calendar'
-import user from './authorization'
+import { user } from './user'
 import {myFaculties, faculties, joinToFacultyWindow, visibleFaculty} from './faculties'
 import sidebar from './sidebar'
 import {alerts} from "./alert";
-import { admin } from './admin'
+import { adminPanel, adminPanelMembers } from './admin'
+import { exchanges } from "./exchanges";
 
 export default combineReducers({
     intentions,
@@ -19,6 +20,7 @@ export default combineReducers({
     joinToFacultyWindow,
     visibleFaculty,
     sidebar,
-    admin,
-    alerts
+    adminPanel, adminPanelMembers,
+    alerts,
+    exchanges
 })

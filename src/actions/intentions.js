@@ -1,4 +1,5 @@
 import request from 'axios'
+import {alertInfo} from "./alert";
 
 export const addIntentions = intention => ({
     type: 'ADD_INTENTIONS',
@@ -32,5 +33,6 @@ export const callDeleteIntention = intentionId =>
 
 
 export const callPostIntention = forId =>
-    () => request
-        .post('/api/intentions', { forId });
+    dispatch => request
+        .post('/api/intentions', { forId })
+        .then(() => dispatch(alertInfo('Utworzono')));

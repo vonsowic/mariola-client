@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, ButtonGroup, Col, Glyphicon, Grid, OverlayTrigger, Panel, Row, Tooltip} from "react-bootstrap";
+import {Button, ButtonGroup, Col, Glyphicon, Grid, OverlayTrigger, Row, Tooltip} from "react-bootstrap";
 
 export default function (props) {
     return (

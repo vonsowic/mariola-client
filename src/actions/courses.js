@@ -10,7 +10,6 @@ export const callGetCourses = facultyId =>
 const fromGeneralToCalendarFormat = course => Object.assign({}, course, {
         start: convertCourseDateToCalendarFormat(course.dayOfWeek, course.start),
         end: convertCourseDateToCalendarFormat(course.dayOfWeek, course.end),
-        title: course.name
     });
 
 const convertCourseDateToCalendarFormat = (dayOfWeek, time) => {
@@ -47,9 +46,7 @@ const startEndOfWeek = weekDate => ({
     end: moment(weekDate).add(7 - weekDate.getDay(), 'days').hour(0).minute(0).second(0).toDate(),
 });
 
-const toCalendarFormat = e => ({
-    id: e.id,
-    title: e.name,
+const toCalendarFormat = e => Object.assign({}, e, {
     start: new Date(e["courses_details.start"]),
     end: new Date(e["courses_details.end"]),
 });

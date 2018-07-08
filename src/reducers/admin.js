@@ -4,7 +4,7 @@ const defaultState = {
 };
 
 
-export const admin = (state=defaultState, action) => {
+export const adminPanel = (state=defaultState, action) => {
     switch (action.type) {
         case 'SHOW_EXCHANGES':
             return Object.assign({}, state, {
@@ -23,6 +23,17 @@ export const admin = (state=defaultState, action) => {
             });
         case 'HIDE_ADMIN_MODAL':
             return Object.assign({}, defaultState);
+        default:
+            return state
+    }
+};
+
+export const adminPanelMembers = (state={}, action) => {
+    switch (action.type) {
+        case 'UPDATE_MEMBER':
+            return Object.assign({}, state, {[action.member.id]: action.member});
+        case 'SET_FACULTY_MEMBERS':
+            return action.members.reduce((acc, it) => Object.assign(acc, {[it.id]: it}),{});
         default:
             return state
     }

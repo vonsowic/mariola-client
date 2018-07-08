@@ -48,3 +48,40 @@ export const hide = () => ({
     type: 'HIDE_ADMIN_MODAL'
 });
 
+
+export const callGetFacultyMembers = ({id}) =>
+    dispatch => request
+        .get(`/api/faculties/${id}/members`)
+        .then(({data}) => dispatch(setFacultyMembers(data)));
+
+export const setFacultyMembers = members => ({
+    type: 'SET_FACULTY_MEMBERS',
+    members
+});
+
+export const setBanToStudent = (faculty, student, isBanned) =>
+    dispatch => request
+        .patch(`/api/faculties/${faculty.id}/${student.id}`, {
+            isBanned
+        })
+        .then(() => {
+            const updatedStudent = Object.assign({}, student);
+            updatedStudent['user_faculty'].isBanned=isBanned;
+            return dispatch(updateMember(updatedStudent))
+        });
+
+export const callPatchAddAdmin = (faculty, student) =>
+    dispatch => request
+        .patch(`/api/faculties/${faculty.id}/${student.id}`, {
+            isAdmin: true
+        })
+        .then(() => {
+            const updatedStudent = Object.assign({}, student);
+            updatedStudent['user_faculty'].isAdmin=true;
+            return dispatch(updateMember(updatedStudent))
+        });
+
+const updateMember = member => ({
+    type: 'UPDATE_MEMBER',
+    member
+});
