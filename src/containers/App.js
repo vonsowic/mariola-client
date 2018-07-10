@@ -8,7 +8,7 @@ import {AlertList} from "react-bs-notifier";
 import {connect} from "react-redux";
 import {dismissAlert} from "../actions/alert";
 import MyPlan from "./MyPlan";
-
+import HowItWorks from "../components/HowItWorks";
 
 class App extends Component {
     render() {
@@ -23,6 +23,7 @@ class App extends Component {
                             alerts={this.props.alerts} />
                         <Switch>
                             <Route exact path='/' component={HomePage}/>
+                            <Route exact path='/about' component={HowItWorks}/>
                             <Route exact path='/myplan' component={MyPlan}/>
                             <Route path='/:facultyId' component={FacultyView}/>
                             <Route path='/*' component={NotFound}/>

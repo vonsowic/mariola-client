@@ -11,7 +11,7 @@ class Container extends React.Component {
 
     render() {
         return <div>
-                <JoinToFaculty/>
+                <JoinToFaculty joinCallback={this.props.joinCallback}/>
                 <FacultiesList
                     isLoggedIn={this.props.isLoggedIn}
                     faculties={this.props.faculties}

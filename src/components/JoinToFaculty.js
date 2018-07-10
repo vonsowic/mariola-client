@@ -14,7 +14,7 @@ export default class extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <DropdownButton title={this.state.selectedGroupText || "Wybierz grupę"}>
-                        { this.props.groups.map((g, index) =>
+                        { this.props.groups.sort().map((g, index) =>
                             <MenuItem onClick={() => this.setState({selectedGroupText: g})} eventKey={index}>{g}</MenuItem>) }
                     </DropdownButton>
                 </Modal.Body>

@@ -16,16 +16,14 @@ export const faculties = (state=[], action) => {
     }
 };
 
-export const joinToFacultyWindow = (state={isOpen: false, faculty: null, groups: []}, action) => {
+export const joinToFacultyWindow = (state={faculty: null, groups: []}, action) => {
     switch (action.type){
         case 'OPEN_JOIN_TO_FACULTY':
             return Object.assign({}, state, {
-                isOpen: true,
                 faculty: action.faculty
             });
         case 'CLOSE_JOIN_TO_FACULTY':
             return Object.assign({}, state, {
-                isOpen: false,
                 faculty: null,
                 groups: []
             });

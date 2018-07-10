@@ -36,7 +36,7 @@ export const closeJoinToFaculty = () => ({
 });
 
 
-export const callJoinToFaculty = (faculty, initialGroup) =>
+export const callJoinToFaculty = (faculty, initialGroup, callback=()=>{}) =>
     dispatch => {
         dispatch(closeJoinToFaculty());
 
@@ -48,7 +48,7 @@ export const callJoinToFaculty = (faculty, initialGroup) =>
             .then(() => {
                 dispatch(alertInfo(`Jesteś teraz członkiem kierunku ${faculty.name}`));
                 return dispatch(callRefresh())
-                    .then(() => setTimeout(() => window.location.replace(`/${faculty.id}/exchanges`), 1000))
+                    .then(callback)
             })
     };
 

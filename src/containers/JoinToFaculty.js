@@ -12,7 +12,8 @@ class Container extends React.Component {
                 isOpen={this.props.isOpen}
                 faculty={this.props.faculty}
                 onClose={() => this.props.dispatch(closeJoinToFaculty())}
-                onAccepted={(faculty, group) => this.props.dispatch(callJoinToFaculty(faculty, group))}
+                onAccepted={(faculty, group) => this.props.dispatch(
+                    callJoinToFaculty(faculty, group, () => this.props.joinCallback(faculty.id)))}
                 groups={this.props.groups}
             />
         } else return null
@@ -27,7 +28,7 @@ class Container extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        isOpen: state.joinToFacultyWindow.isOpen,
+        isOpen: state.joinToFacultyWindow.faculty !== null,
         faculty: state.joinToFacultyWindow.faculty,
         groups: state.joinToFacultyWindow.groups
     }
