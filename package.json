@@ -4,6 +4,9 @@
   "description": "Client for Mariola backend written in React",
   "main": "src/index.js",
   "repository": "https://github.com/vonsowic/mariola-client",
+  "engines": {
+    "node": "10.4.0"
+  }
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -37,5 +40,6 @@
     "prop-types": "^15.6.2",
     "react-scripts": "^1.1.4"
   },
-  "homepage": "./"
+  "homepage": "./",
+  "proxy": "http://localhost:3000"
 }
