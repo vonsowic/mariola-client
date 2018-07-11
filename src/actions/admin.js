@@ -32,22 +32,6 @@ export const callPatchSetMaxStudentsNumber = (course, facultyId) =>
         })
         .then(() => dispatch(updateGeneralCourse(course)));
 
-export const showExchanges = () => ({
-    type: 'SHOW_EXCHANGES'
-});
-
-export const showCourses = () => ({
-    type: 'SHOW_COURSES'
-});
-
-export const showMembers = () => ({
-    type: 'SHOW_MEMBERS'
-});
-
-export const hide = () => ({
-    type: 'HIDE_ADMIN_MODAL'
-});
-
 
 export const callGetFacultyMembers = ({id}) =>
     dispatch => request

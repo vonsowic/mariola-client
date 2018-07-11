@@ -1,5 +1,5 @@
 import React from 'react'
-import Faculties from "../containers/Faculties";
+import Faculties from "../containers/AvailableFaculties";
 import {Button, Jumbotron} from "react-bootstrap";
 
 export default function HomePage(props) {
@@ -14,6 +14,10 @@ export default function HomePage(props) {
 
             <hr/>
             <Faculties joinCallback={facultyId => props.history.push(`/${facultyId}/exchanges`)}/>
+
+            {props.isLoggedIn
+                ? <p>Jeśli nie ma go na powyższej liście, wyślij prośbę o utworzenie na <a href="mailto:mariola.dev@gmail.com">mariola.dev@gmail.com</a></p>
+                : null}
         </div>
     )
 }

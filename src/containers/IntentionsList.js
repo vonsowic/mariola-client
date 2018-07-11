@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {callGetIntentions, callDeleteIntention} from '../actions/intentions'
 import { connect } from 'react-redux';
-import IntentionsView from '../components/IntentionsView'
+import BaseListView from '../components/BaseListView'
+import {Button, Well} from "react-bootstrap";
 
 class IntentionsList extends Component {
     componentDidMount(){
@@ -10,13 +11,31 @@ class IntentionsList extends Component {
 
     render() {
         return this.props.intentions.length > 0
-            ? <IntentionsView
-                userId={this.props.userId}
-                intentions={this.props.intentions}
-                onDeleteIntention={intentionId => this.props.dispatch(callDeleteIntention(intentionId))}/>
+            ? <BaseListView
+                descriptions={['Przedmiot', 'Utworzone przez', 'Z grupy', 'Na grupe']}
+                elements={this.props.intentions}
+                render={props => <IntentionListElement
+                    content={props}
+                    userId={this.props.userId}
+                    onDeleteIntention={() => this.props.dispatch(callDeleteIntention(props.id))}/>}
+            />
             : <div>
-                <p>Brak możliwych wymian do wyświetlenia</p></div>
+                <Well bsSize="small">Brak możliwych wymian do wyświetlenia</Well>
+            </div>
     }
+}
+
+function IntentionListElement(props){
+    const i = props.content;
+    return <tr key={props.key}>
+        <td>{i.what.name}</td>
+        <td>{i.from.name} {i.from.lastName}</td>
+        <td>{i.what.group}</td>
+        <td>{i.for.group}</td>
+        {i.from.id === props.userId
+            ? <td><Button bsStyle="danger" onClick={props.onDeleteIntention}>Usuń</Button></td>
+            : <td/>}
+    </tr>
 }
 
 function mapStateToProps(state){

@@ -3,7 +3,7 @@ import Sidebar from './Sidebar'
 import ExchangePanel from './ExchangesPanel'
 import {Route} from "react-router-dom";
 import FacultyPlan from "../containers/FacultyPlan";
-import AdminPanel from "../containers/admin/AdminPanel";
+import AdminPanel from "../containers/admin";
 
 
 export default ({url, facultyId, isAdmin}) => (
@@ -16,10 +16,10 @@ export default ({url, facultyId, isAdmin}) => (
         <div className="col-sm-10">
             <Route
                 exact path={`${url}/exchanges`}
-                render={() => <ExchangePanel/>}/>
+                component={ExchangePanel}/>
             <Route
                 exact path={`${url}/plan`}
-                component={() => <FacultyPlan/>}/>
+                component={FacultyPlan}/>
             { isAdmin
                 ? <Route
                     exact path={`${url}/settings`}
@@ -27,5 +27,4 @@ export default ({url, facultyId, isAdmin}) => (
                 : null }
         </div>
     </div>
-
 )

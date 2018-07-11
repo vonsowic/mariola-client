@@ -5,5 +5,6 @@ import GeneralPlan from '../containers/GeneralPlan'
 export default () => (
     <div>
         <GeneralPlan/>
+        <hr/>
         <IntentionsList/>
     </div>)

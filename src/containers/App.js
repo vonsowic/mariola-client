@@ -16,13 +16,13 @@ class App extends Component {
             <BrowserRouter>
                 <div>
                     <NavigationHeader/>
-                    <div className="container">
+                    <div className="container pb-1-">
                         <AlertList
                             onDismiss={alert => this.props.dispatch(dismissAlert(alert))}
                             timeout={this.props.alerts.length > 0 ? this.props.alerts[0].timeout : 0}
                             alerts={this.props.alerts} />
                         <Switch>
-                            <Route exact path='/' component={HomePage}/>
+                            <Route exact path='/' render={renderProps => <HomePage {...renderProps} isLoggedIn={this.props.isLoggedIn}/>}/>
                             <Route exact path='/about' component={HowItWorks}/>
                             <Route exact path='/myplan' component={MyPlan}/>
                             <Route path='/:facultyId' component={FacultyView}/>
@@ -36,6 +36,7 @@ class App extends Component {
 
 function mapStateToProps(state){
     return {
+        isLoggedIn: state.user.id !== null,
         alerts: state.alerts
     }
 }

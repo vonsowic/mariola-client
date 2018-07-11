@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import {callGetFacultyMembers, callPatchAddAdmin, setBanToStudent} from "../../actions/admin";
-import MembersList from "../../components/MembersList";
+import {callGetFacultyMembers, setBanToStudent} from "../../actions/admin";
+import BaseListView from "../../components/BaseListView";
+import Button from "react-bootstrap/es/Button";
 
 class Container extends React.Component {
     componentDidMount() {
@@ -9,12 +10,30 @@ class Container extends React.Component {
     }
 
     render() {
-        return <MembersList
-            members={this.props.members.sort((m1, m2) => m1.lastName > m2.lastName )}
-            onAddAdmin={student => this.props.dispatch(callPatchAddAdmin(this.props.faculty, student))}
-            onBan={student => this.props.dispatch(setBanToStudent(this.props.faculty, student, true))}
-            onUnban={student => this.props.dispatch(setBanToStudent(this.props.faculty, student, false))}/>
+        const createBanAction = (student, ban) => () => this.props.dispatch(setBanToStudent(this.props.faculty, student, ban));
+        return <BaseListView
+            descriptions={['Student', 'Grupa']}
+            elements={this.props.members.sort((m1, m2) => m1.lastName > m2.lastName )}
+            render={member => <MemberItem
+                member={member}
+                button={member['user_faculty'].isBanned
+                ? <Button onClick={createBanAction(member, false)} bsStyle="primary">Odbanuj</Button>
+                : <Button onClick={createBanAction(member, true)} bsStyle="warning">Banuj</Button>} />} />
     }
+}
+
+function MemberItem({member, button}) {
+    return (
+        <tr>
+            <td>{member.name} {member.lastName}{member['user_faculty'].isAdmin ? '(starosta)' : ''}</td>
+            <td>
+                {member['user_faculty'].group}
+            </td>
+            <td>
+                {button}
+            </td>
+        </tr>
+    )
 }
 
 function mapStateToProps(state){

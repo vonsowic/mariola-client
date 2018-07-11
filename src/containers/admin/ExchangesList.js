@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import ExchangesList from "../../components/ExchangesList";
 import {callGetExchanges} from "../../actions/exchanges";
+import BaseListView from "../../components/BaseListView";
 
 class Container extends React.Component {
     componentDidMount(){
@@ -9,8 +9,24 @@ class Container extends React.Component {
     }
 
     render() {
-        return <ExchangesList exchanges={this.props.exchanges}/>
+        return <BaseListView
+            descriptions={['Przedmiot', 'Kto', '']}
+            render={exchange => <ExchangeItem exchange={exchange}/>}
+            elements={this.props.exchanges}/>
     }
+}
+
+
+function ExchangeItem({exchange}) {
+    return (
+        <tr>
+            <td>{exchange.what.name}</td>
+            <td>{exchange.from.name} {exchange.from.lastName} z {exchange.what.group} do {exchange.for.group}</td>
+            <td>{exchange.to
+                ? `${exchange.from.name} ${exchange.from.lastName} z ${exchange.what.group} do ${exchange.for.group}`
+                : 'przejście bez wymiany'}</td>
+        </tr>
+    )
 }
 
 function mapStateToProps(state){

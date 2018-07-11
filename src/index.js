@@ -9,8 +9,6 @@ import {callGetUnseenExchanges} from "./actions/notification";
 
 axiosInit(store.dispatch);
 
-console.log(process.env)
-
 ReactDOM.render(
     <Provider store={store}>
         <App />
@@ -19,8 +17,5 @@ ReactDOM.render(
 
 
 websocket(store);
-
-console.log("zmienne")
-console.log(process.env)
 
 store.dispatch(callGetUnseenExchanges());

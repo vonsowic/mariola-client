@@ -6,7 +6,7 @@ import { user } from './user'
 import {myFaculties, faculties, joinToFacultyWindow, visibleFaculty} from './faculties'
 import sidebar from './sidebar'
 import {alerts} from "./alert";
-import { adminPanel, adminPanelMembers } from './admin'
+import { adminPanelMembers } from './admin'
 import { exchanges } from "./exchanges";
 
 export default combineReducers({
@@ -20,7 +20,7 @@ export default combineReducers({
     joinToFacultyWindow,
     visibleFaculty,
     sidebar,
-    adminPanel, adminPanelMembers,
+    adminPanelMembers,
     alerts,
     exchanges
 })

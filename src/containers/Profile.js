@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { connect } from "react-redux";
 import Profile from '../components/Profile'
 import {callLogin, logout} from '../actions/authorization'
 import {callGetMyFaculties} from "../actions/faculties";
 import {Nav, NavItem} from "react-bootstrap";
-import {FacebookLoginButton} from "react-social-login-buttons";
 import Login from "../components/Login";
 
 class Container extends Component {
