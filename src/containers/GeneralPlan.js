@@ -59,7 +59,14 @@ class GeneralPlan extends Component {
                         height: "100vh",
                     }}
                     components={{
-                        event: CalendarEvent
+                        event: CalendarEvent,
+                        day: {
+                            header: Test,
+                            event: Test,
+                        }
+                    }}
+                    formats={{
+                        dayFormat: 'dd'
                     }}
                     min={new Date(moment().hour(7).minute(0))}
                     max={new Date(moment().hour(21).minute(0))}
@@ -78,7 +85,9 @@ class GeneralPlan extends Component {
     }
 }
 
-
+function Test() {
+    return <div>Hello</div>
+}
 
 function mapStateToProps(state) {
     return {
