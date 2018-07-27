@@ -66,7 +66,7 @@ class GeneralPlan extends Component {
                         }
                     }}
                     formats={{
-                        dayFormat: 'dd'
+                        dayFormat: 'dddd'
                     }}
                     min={new Date(moment().hour(7).minute(0))}
                     max={new Date(moment().hour(21).minute(0))}
