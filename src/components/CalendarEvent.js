@@ -1,5 +1,6 @@
 import React from "react";
 import {OverlayTrigger, Popover} from "react-bootstrap";
+import moment from "moment";
 
 export default function ({event}) {
     return (
@@ -14,9 +15,17 @@ export default function ({event}) {
 
 function infoAboutOther(event) {
     return (
-        <Popover id={`popover-info-${event.id}`} title={`${event.name} ${event.group}`}>
+        <Popover id={`popover-info-${event.id}`} title={getFormattedTitle(event)}>
             <span>
                 <small>{event.other}</small>
             </span>
         </Popover>)
+}
+
+function getFormattedTitle(event) {
+    return `${event.name} 
+        ${event.group} 
+        ${moment(event.start).format('HH:mm')}
+        -
+        ${moment(event.end).format('HH:mm')}`
 }
