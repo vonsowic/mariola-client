@@ -11,14 +11,18 @@ class IntentionsList extends Component {
 
     render() {
         return this.props.intentions.length > 0
-            ? <BaseListView
-                descriptions={['Przedmiot', 'Utworzone przez', 'Z grupy', 'Na grupe']}
-                elements={this.props.intentions}
-                render={props => <IntentionListElement
-                    content={props}
-                    userId={this.props.userId}
-                    onDeleteIntention={() => this.props.dispatch(callDeleteIntention(props.id))}/>}
-            />
+            ? <div>
+                <h2>Inni studenci chcą chodzić na:</h2>
+                <BaseListView
+                    descriptions={['Przedmiot', 'Student', 'Z grupy', 'Na grupe']}
+                    elements={this.props.intentions}
+                    render={props => <IntentionListElement
+                        key={props.key}
+                        content={props}
+                        userId={this.props.userId}
+                        onDeleteIntention={() => this.props.dispatch(callDeleteIntention(props.id))}/>}
+                />
+            </div>
             : <div>
                 <Well bsSize="small">Brak możliwych wymian do wyświetlenia</Well>
             </div>

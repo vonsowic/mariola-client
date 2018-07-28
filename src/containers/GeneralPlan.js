@@ -7,8 +7,8 @@ import { connect } from 'react-redux'
 import {callGetCourses, callGetMyCoursesIds} from "../actions/courses";
 import {callPostIntention} from "../actions/intentions";
 import {select, deselect} from "../actions/calendar";
-import Help from "./FacultyInfo";
 import CalendarEvent from "../components/CalendarEvent";
+import FiltersList from "../components/FiltersList";
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
@@ -19,7 +19,7 @@ class GeneralPlan extends Component {
     }
 
     render(){
-        const closeModal = () => this.props.dispatch(deselect())
+        const closeModal = () => this.props.dispatch(deselect());
         return (
             <div>
                 <Modal show={this.props.selectedCourseId != null} onEscapeKeyDown={closeModal} onHide={closeModal}>
@@ -38,7 +38,8 @@ class GeneralPlan extends Component {
                     </Modal.Footer>
                 </Modal>
 
-                <Help/>
+                <FiltersList/>
+
 
                 <BigCalendar
                     toolbar={false}
@@ -49,7 +50,7 @@ class GeneralPlan extends Component {
                     views={["work_week"]}
                     eventPropGetter={event => ({
                             style: {
-                                opacity: event.group === '0' ? 0.5 : 1.0,
+                                opacity: this.props.courseFilter(event) ? 1.0 : 0.2,
                                 backgroundColor: this.props.myCoursesIds.includes(event.id)
                                     ? "#ad4ca4"
                                     : "#3174ad",
@@ -60,10 +61,6 @@ class GeneralPlan extends Component {
                     }}
                     components={{
                         event: CalendarEvent,
-                        day: {
-                            header: Test,
-                            event: Test,
-                        }
                     }}
                     formats={{
                         dayFormat: 'dddd'
@@ -75,6 +72,8 @@ class GeneralPlan extends Component {
             </div>)
     }
 
+
+
     selectedCourseToText(){
         if(!this.props.selectedCourseId){
             return '';
@@ -85,15 +84,12 @@ class GeneralPlan extends Component {
     }
 }
 
-function Test() {
-    return <div>Hello</div>
-}
-
 function mapStateToProps(state) {
     return {
         facultyId: state.visibleFaculty.id,
         courses: Object.values(state.courses),
         selectedCourseId: state.calendar.selectedCourseId,
+        courseFilter: state.courseFilters,
         myCoursesIds: state.myCoursesIds
     }
 }

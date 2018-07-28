@@ -11,7 +11,7 @@ const tooltip = (
 export default function (props) {
     return (
         <div>
-            <h1>Dołącz do kierunku</h1>
+            <h1>Dołącz do kierunku <small>(poniższe kierunki są z poprzedniego semestru i mają jedynie pokazać jak w nadchodzącym aplikacja mogłaby działać)</small></h1>
             {props.isLoggedIn
             ? <ListGroup>
                     {props.faculties.length > 0

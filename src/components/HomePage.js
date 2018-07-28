@@ -6,7 +6,7 @@ export default function HomePage(props) {
     return (
         <div>
             <Jumbotron>
-                <h1>Mariola</h1>
+                <h1>Mariola<small>(beta)</small></h1>
                 <p>To nieoficjala giełda wymian zajęć dla studentów AGH wydziału EAIIB</p>
                 <Button bsStyle='success' onClick={() => props.history.push('/about')}>Dowiedz się więcej</Button>
 

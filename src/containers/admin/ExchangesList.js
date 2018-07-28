@@ -10,7 +10,7 @@ class Container extends React.Component {
 
     render() {
         return <BaseListView
-            descriptions={['Przedmiot', 'Kto', '']}
+            descriptions={['Przedmiot', 'Kto', 'Z kim']}
             render={exchange => <ExchangeItem exchange={exchange}/>}
             elements={this.props.exchanges}/>
     }

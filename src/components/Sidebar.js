@@ -10,7 +10,7 @@ export default function Sidebar({facultyId, isAdmin}) {
                 <Navbar.Collapse>
                     <Nav>
                         <LinkContainer to={`/${facultyId}/plan`}><NavItem>Plan zajęć</NavItem></LinkContainer>
-                        <LinkContainer to={`/${facultyId}/exchanges`}><NavItem>Centrum wymian</NavItem></LinkContainer>
+                        <LinkContainer to={`/${facultyId}/exchanges`}><NavItem>Giełda wymian</NavItem></LinkContainer>
                         { isAdmin
                             ? <LinkContainer to={`/${facultyId}/settings`}><NavItem>Panel starosty</NavItem></LinkContainer>
                             : null

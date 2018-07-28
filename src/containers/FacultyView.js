@@ -11,7 +11,7 @@ class Container extends React.Component {
     render() {
         return <FacultyView
             url={this.props.match.url}
-            facultyId={this.props.faculty.id}
+            faculty={this.props.faculty}
             isAdmin={this.props.isAdmin}/>
     }
 }
