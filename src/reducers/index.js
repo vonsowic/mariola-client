@@ -8,6 +8,7 @@ import sidebar from './sidebar'
 import {alerts} from "./alert";
 import { adminPanelMembers } from './admin'
 import { exchanges } from "./exchanges";
+import {courseFilters} from "./filters";
 
 export default combineReducers({
     intentions,
@@ -22,5 +23,6 @@ export default combineReducers({
     sidebar,
     adminPanelMembers,
     alerts,
-    exchanges
+    exchanges,
+    courseFilters
 })
